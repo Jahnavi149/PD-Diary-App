@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.example.pddiary.models.DairyListItem
 import com.example.pddiary.models.DairyModel
 import com.example.pddiary.models.HeaderModel
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DairyViewModel : ViewModel() {
 
@@ -59,6 +62,30 @@ class DairyViewModel : ViewModel() {
         DairyModel("11PM-11:30PM", asleep = false, on = false, onWithTroublesome = false, onWithoutTroublesome = false, off = false, med1 = false, med2 = false, measurement = 0),
         DairyModel("11:30PM-12AM", asleep = false, on = false, onWithTroublesome = false, onWithoutTroublesome = false, off = false, med1 = false, med2 = false, measurement = 0),
     )
+
+    private var selectedDate: String? = null
+
+    fun setSelectedDate(date: String) {
+        selectedDate = date
+    }
+
+    fun getSelectedDate(): String? {
+        return selectedDate
+    }
+
+    fun loadDiaryDataForSelectedDate(filesDir: File) {
+        selectedDate?.let { date ->
+            val fileName = "$date.csv"
+            val file = File(filesDir, fileName)
+
+            if (file.exists()) {
+                val data = file.readText()
+                setDiaryData(data)
+            } else {
+                resetToDefault()
+            }
+        }
+    }
 
     private var currentData: String = "" // To store the serialized CSV data
 
@@ -116,6 +143,7 @@ class DairyViewModel : ViewModel() {
             // Add the button model at the end
             Log.v("viewModel", "Diary data loaded and updated with ${list.size} items")
         } else {
+            resetToDefault()
             Log.v("viewModel", "No valid data to update from CSV")
         }
     }
@@ -177,5 +205,16 @@ class DairyViewModel : ViewModel() {
         list.addAll(defaultItems)
     }
 
+    fun getSavedDiaryDates(filesDir: File): List<String> {
+        val dates = mutableListOf<String>()
+        val dateFormat = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault())
 
+        filesDir.listFiles()?.forEach { file ->
+            if (file.name.endsWith(".csv")) {
+                val date = file.name.removeSuffix(".csv")
+                dates.add(date)
+            }
+        }
+        return dates.sortedWith(compareBy { dateFormat.parse(it) })
+    }
 }

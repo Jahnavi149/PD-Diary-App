@@ -30,11 +30,18 @@ class HomeFragment : Fragment() {
 
         // Finding the CardView by its ID
         val addNewDiaryCard: CardView = view.findViewById(R.id.add_new_diary_card)
+        val viewPreviousDiaryCard: CardView = view.findViewById(R.id.view_update_diary_card)
 
         // A click listener on the CardView
         addNewDiaryCard.setOnClickListener {
             // Navigation to the diary page
             findNavController().navigate(R.id.action_homeFragment_to_dairyFragment)
+        }
+
+        // A click listener on the View/Update Previous Diary CardView
+        viewPreviousDiaryCard.setOnClickListener {
+            // Navigation to the View Diary Page
+            findNavController().navigate(R.id.action_homeFragment_to_viewDiaryPageFragment)
         }
 
     }

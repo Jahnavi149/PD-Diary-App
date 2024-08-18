@@ -17,6 +17,11 @@
         android:name="com.example.pddiary.fragments.ProfileFragment"
         android:label="ProfileFragment" />
 
+    <fragment
+        android:id="@+id/viewDiaryPageFragment"
+        android:name="com.example.pddiary.fragments.ViewDiaryPageFragment"
+        android:label="View Diary Page" />
+
     <action
         android:id="@+id/action_global_homeFragment"
         app:destination="@id/homeFragment"
@@ -39,5 +44,12 @@
         android:id="@+id/action_homeFragment_to_dairyFragment"
         app:destination="@id/dairyFragment"/>
 
+    <action
+        android:id="@+id/action_homeFragment_to_viewDiaryPageFragment"
+        app:destination="@id/viewDiaryPageFragment" />
+
+    <action
+        android:id="@+id/action_viewDiaryPageFragment_to_dairyFragment"
+        app:destination="@id/dairyFragment" />
 
 </navigation>

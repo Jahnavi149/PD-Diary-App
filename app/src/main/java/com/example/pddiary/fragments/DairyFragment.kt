@@ -66,6 +66,8 @@ class DairyFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        // Load data for the selected date
+        viewModel.loadDiaryDataForSelectedDate(requireContext().filesDir)
         val list = viewModel.getDairyList()
         Log.v("fragmentResumed", list.size.toString() )
         binding.dairyRecyclerview.layoutManager = LinearLayoutManager(context)

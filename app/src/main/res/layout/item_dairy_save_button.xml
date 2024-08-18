@@ -6,11 +6,11 @@
 
     <Button
         android:id="@+id/dairy_save_button"
-        android:layout_width="224dp"
+        android:layout_width="150dp"
         android:layout_height="56dp"
         android:backgroundTint="@color/black"
         android:textColor="@android:color/white"
-        android:layout_marginVertical="24dp"
+        android:layout_marginVertical="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
