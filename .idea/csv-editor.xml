@@ -10,6 +10,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="$USER_HOME$/Library/Caches/Google/AndroidStudio2024.1/device-explorer/Pixel Fold API 35/_/data/data/com.example.pddiary/files/2024-8-18.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Library/Caches/Google/AndroidStudio2024.1/device-explorer/Pixel Fold API 35/_/data/data/com.example.pddiary/files/2024-8-19.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Library/Caches/Google/AndroidStudio2024.1/device-explorer/Pixel Fold API 35/_/data/data/com.example.pddiary/files/2024-8-20.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

@@ -19,7 +19,9 @@ import com.example.pddiary.R
 import java.io.File
 import java.io.FileOutputStream
 import java.io.FileReader
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class DairyFragment : Fragment() {
 
@@ -88,7 +90,11 @@ class DairyFragment : Fragment() {
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             { _, selectedYear, selectedMonth, selectedDay ->
-                selectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
+                val selectedCalendar = Calendar.getInstance()
+                selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
+                val dateFormat = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault())
+                selectedDate = dateFormat.format(selectedCalendar.time)
+                binding.tvSelectedDate.text = selectedDate  // To display the selected date in the middle
                 loadDiaryEntry(selectedDate)
             },
             year, month, day
@@ -115,10 +121,12 @@ class DairyFragment : Fragment() {
 
         if (file.exists()) {
             val data = FileReader(file).readText()
-            viewModel.setDiaryData(data) // Assuming you have a method to set the data
+            viewModel.setDiaryData(data)
             updateUI() // Refresh the UI with the loaded data
             Toast.makeText(requireContext(), "Loaded diary entry for $date", Toast.LENGTH_SHORT).show()
         } else {
+            viewModel.resetToDefault()  // Explicitly reset to default values
+            updateUI()
             Toast.makeText(requireContext(), "No diary entry found for $date", Toast.LENGTH_SHORT).show()
         }
     }

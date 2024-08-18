@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="54dp"
     android:orientation="horizontal"
-    android:weightSum="7"
+    android:weightSum="9"
     android:background="?attr/selectableItemBackground">
 
     <com.google.android.material.textview.MaterialTextView
@@ -62,8 +62,37 @@
         android:layout_gravity="center"
         android:layout_weight="1"/>
 
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/med_1_status"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_dairy_item_bg"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="1"/>
 
-    <!-- New Measurement input -->
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/med_2_status"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_dairy_item_bg"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="1"/>
+
+    <SeekBar
+        android:id="@+id/symptom_rating_seekbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:max="100"
+        android:background="@drawable/ic_dairy_item_bg"
+        android:padding="17dp"
+        android:progressDrawable="@drawable/seekbar_progress"
+        android:thumb="@drawable/seekbar_thumb"/>
+
+
+    <!-- New Measurement input
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/measurement_input_layout"
         android:layout_width="0dp"
@@ -77,7 +106,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:gravity="center"/>
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout> -->
 
 
 </LinearLayout>

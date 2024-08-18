@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +28,23 @@
             android:textSize="18sp"
             android:textColor="@android:color/holo_blue_bright"
             android:padding="8dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSelectedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+        <!-- Submit Button in the Top Right -->
+        <include
+            layout="@layout/item_dairy_save_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </LinearLayout>
 
@@ -50,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:orientation="horizontal"
-            android:weightSum="7"
+            android:weightSum="9"
             android:background="@color/white">
 
             <com.google.android.material.textview.MaterialTextView
@@ -115,11 +133,31 @@
                 android:background="@drawable/ic_dairy_item_bg"
                 android:gravity="center"/>
 
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Med-1 Status"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_dairy_item_bg"
+                android:gravity="center"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Med-2 Status"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_dairy_item_bg"
+                android:gravity="center"/>
+
             <!-- New Measurement column -->
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:text="Rate Your Symptom From 1 to 100"
+                android:text="Rate Symptom From 1 to 100"
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:layout_gravity="center"
@@ -128,12 +166,5 @@
         </LinearLayout>
 
     </FrameLayout>
-
-    <!-- Include the save button at the bottom -->
-    <include
-        layout="@layout/item_dairy_save_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
