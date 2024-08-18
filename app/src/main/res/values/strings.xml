@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">PD diary</string>
+    <string name="patient_unique_id">Patient Unique ID</string>
+    <string name="enter_the_id">Enter the id</string>
+    <string name="patient_device_name">Patient Device Name</string>
+    <string name="enter_device_name">Enter device name</string>
+    <string name="address">Address</string>
+    <string name="enter_server_address">Enter server address</string>
+    <string name="submit">Submit</string>
+    <string name="user_profile">User Profile</string>
+    <string name="device">Device</string>
+    <string name="server_address">Server Address</string>
+    <string name="name_of_prescribed_medication">Name of the prescribed Medication(s)</string>
+    <string name="enter_medication_number">Enter number of presribed medication</string>
+    <string name="medication">Medication</string>
+    <string name="enter_number_of_prescribed_medication">Enter number of prescribed medication</string>
+    <string name="enter_server_base_url">Enter server base url</string>
+    <string name="add_a_new_diary">Add A New Diary</string>
+    <string name="view_update_previous_diary">View/Update Previous Diary</string>
+    <string name="asu_mayo_pd_app">ASU Mayo PD App</string>
+</resources>

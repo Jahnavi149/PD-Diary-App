@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.pddiary.fragments.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/dairyFragment"
+        android:name="com.example.pddiary.fragments.DairyFragment"
+        android:label="DairyFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.pddiary.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
+
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="false"/>
+
+    <action
+        android:id="@+id/action_global_dairyFragment"
+        app:destination="@id/dairyFragment"
+        app:popUpTo="@id/dairyFragment"
+        app:popUpToInclusive="false"/>
+
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment"
+        app:popUpTo="@id/profileFragment"
+        app:popUpToInclusive="false"/>
+
+    <action
+        android:id="@+id/action_homeFragment_to_dairyFragment"
+        app:destination="@id/dairyFragment"/>
+
+
+</navigation>
