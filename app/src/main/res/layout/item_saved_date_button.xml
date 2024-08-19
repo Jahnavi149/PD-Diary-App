@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textColor="@android:color/black"
-    android:background="?attr/selectableItemBackground"
+    android:background="@drawable/button_background"
     android:padding="16dp"
     android:layout_marginTop="8dp"
+    android:textSize="24sp"
     android:text="Date Text Here" />
