@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <!-- App Label -->
     <TextView
         android:id="@+id/app_label"
         android:layout_width="wrap_content"
@@ -14,26 +14,26 @@
         android:text="@string/asu_mayo_pd_app"
         style="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/blue_500"
-        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Add New Diary Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/add_new_diary_card"
         android:layout_width="0dp"
-        android:layout_height="240dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintWidth_percent="0.45"
+        android:layout_height="200dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintWidth_percent="0.4"
         app:layout_constraintTop_toBottomOf="@id/app_label"
         app:layout_constraintEnd_toStartOf="@id/view_update_diary_card"
         app:layout_constraintStart_toStartOf="parent"
-        app:cardElevation="5dp"
-        android:elevation="5dp"
-        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
         app:strokeWidth="2dp"
         app:strokeColor="@color/black"
         android:clickable="true"
@@ -43,26 +43,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_a_new_diary"
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_gravity="center"/>
-
     </androidx.cardview.widget.CardView>
 
+    <!-- View/Update Diary Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/view_update_diary_card"
         android:layout_width="0dp"
-        android:layout_height="240dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintWidth_percent="0.45"
+        android:layout_height="200dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintWidth_percent="0.4"
         app:layout_constraintTop_toBottomOf="@id/app_label"
         app:layout_constraintStart_toEndOf="@id/add_new_diary_card"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardElevation="5dp"
-        android:elevation="5dp"
-        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
         app:strokeWidth="2dp"
         app:strokeColor="@color/black">
 
@@ -70,10 +70,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/view_update_previous_diary"
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_gravity="center"/>
-
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
