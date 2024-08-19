@@ -35,7 +35,11 @@ class ViewDiaryPageFragment : Fragment() {
 
         for (date in savedDates) {
             val button = LayoutInflater.from(context).inflate(R.layout.item_saved_date_button, binding.savedDatesContainer, false)
-            button.findViewById<Button>(R.id.savedDateButton).text = date
+
+            // Convert the date to the readable format
+            val formattedDate = convertToReadableDate(date)
+
+            button.findViewById<Button>(R.id.savedDateButton).text = formattedDate
             button.setOnClickListener {
                 // Set the selected date in the ViewModel
                 viewModel.setSelectedDate(date)
@@ -43,5 +47,27 @@ class ViewDiaryPageFragment : Fragment() {
             }
             binding.savedDatesContainer.addView(button)
         }
+    }
+
+    private fun convertToReadableDate(date: String): String {
+        val parts = date.split("-")
+        val month = when (parts[0]) {
+            "01" -> "January"
+            "02" -> "February"
+            "03" -> "March"
+            "04" -> "April"
+            "05" -> "May"
+            "06" -> "June"
+            "07" -> "July"
+            "08" -> "August"
+            "09" -> "September"
+            "10" -> "October"
+            "11" -> "November"
+            "12" -> "December"
+            else -> "Unknown"
+        }
+        val day = parts[1]
+        val year = parts[2]
+        return "$month $day, $year"
     }
 }
