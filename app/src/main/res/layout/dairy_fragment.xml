@@ -24,19 +24,22 @@
             android:id="@+id/tvSelectDiaryDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/gray_500"
             android:text="Select Diary Date"
+            android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="@android:color/holo_blue_bright"
+            android:textColor="@android:color/holo_blue_dark"
             android:padding="8dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvSelectedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp" />
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp" />
 
         <!-- Submit Button in the Top Right -->
         <include
