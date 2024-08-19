@@ -50,6 +50,7 @@
 
     <action
         android:id="@+id/action_viewDiaryPageFragment_to_dairyFragment"
-        app:destination="@id/dairyFragment" />
+        app:destination="@id/dairyFragment"
+        app:popUpToInclusive="false"/>
 
 </navigation>

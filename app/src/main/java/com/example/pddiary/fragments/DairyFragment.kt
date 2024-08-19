@@ -48,6 +48,14 @@ class DairyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Retrieve the date from the bundle
+        selectedDate = arguments?.getString("selectedDate", "").orEmpty()
+
+        if (selectedDate.isNotEmpty()) {
+            binding.tvSelectedDate.text = selectedDate
+            loadDiaryEntry(selectedDate)
+        }
+
         // Set up the date selector
         binding.tvSelectDiaryDate.setOnClickListener {
             showDatePickerDialog()

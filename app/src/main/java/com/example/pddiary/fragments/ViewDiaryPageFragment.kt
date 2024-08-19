@@ -43,7 +43,13 @@ class ViewDiaryPageFragment : Fragment() {
             button.setOnClickListener {
                 // Set the selected date in the ViewModel
                 viewModel.setSelectedDate(date)
-                findNavController().navigate(R.id.action_viewDiaryPageFragment_to_dairyFragment)
+
+                // Create a bundle and add the date to it
+                val bundle = Bundle().apply {
+                    putString("selectedDate", date)
+                }
+
+                findNavController().navigate(R.id.action_viewDiaryPageFragment_to_dairyFragment, bundle)
             }
             binding.savedDatesContainer.addView(button)
         }
