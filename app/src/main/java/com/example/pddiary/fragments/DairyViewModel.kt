@@ -74,15 +74,19 @@ class DairyViewModel : ViewModel() {
     }
 
     fun loadDiaryDataForSelectedDate(filesDir: File) {
-        selectedDate?.let { date ->
-            val fileName = "$date.csv"
-            val file = File(filesDir, fileName)
+        if (selectedDate == null) {
+            resetToDefault()
+        } else {
+            selectedDate?.let { date ->
+                val fileName = "$date.csv"
+                val file = File(filesDir, fileName)
 
-            if (file.exists()) {
-                val data = file.readText()
-                setDiaryData(data)
-            } else {
-                resetToDefault()
+                if (file.exists()) {
+                    val data = file.readText()
+                    setDiaryData(data)
+                } else {
+                    resetToDefault()
+                }
             }
         }
     }
@@ -203,6 +207,10 @@ class DairyViewModel : ViewModel() {
             DairyModel("11:30PM-12AM", asleep = false, on = false, onWithTroublesome = false, onWithoutTroublesome = false, off = false, med1 = false, med2 = false, measurement = 0),
             )
         list.addAll(defaultItems)
+    }
+
+    fun clearSelectedDate() {
+        selectedDate = null
     }
 
     fun getSavedDiaryDates(filesDir: File): List<String> {

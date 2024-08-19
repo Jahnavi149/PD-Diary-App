@@ -135,6 +135,7 @@ class DairyFragment : Fragment() {
 
     private fun updateUI() {
         val list = viewModel.getDairyList()
+        binding.dairyRecyclerview.layoutManager = LinearLayoutManager(context)
         val adapter = DairyAdapter(list)
         binding.dairyRecyclerview.adapter = adapter
     }
