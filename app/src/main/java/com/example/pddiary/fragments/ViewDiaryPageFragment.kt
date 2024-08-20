@@ -1,6 +1,7 @@
 package com.example.pddiary.fragments
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +11,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pddiary.R
 import com.example.pddiary.databinding.FragmentViewDiaryPageBinding
+import com.example.pddiary.utils.Logger
 
 class ViewDiaryPageFragment : Fragment() {
 
     private lateinit var binding: FragmentViewDiaryPageBinding
     private lateinit var viewModel: DairyViewModel
+    private var startTime: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentViewDiaryPageBinding.inflate(inflater, container, false)
+        startTime = SystemClock.elapsedRealtime()
+        Logger.logEvent(requireContext(), "Visited View Diary Entries Page")
         return binding.root
     }
 
@@ -29,41 +34,41 @@ class ViewDiaryPageFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[DairyViewModel::class.java]
 
-        // Fetch and display the saved dates
         val savedDates = viewModel.getSavedDiaryDates(requireContext().filesDir)
         binding.savedDatesContainer.removeAllViews()
 
         for (date in savedDates) {
             val button = LayoutInflater.from(context).inflate(R.layout.item_saved_date_button, binding.savedDatesContainer, false)
 
-            // Convert the date to the readable format
             val formattedDate = convertToReadableDate(date)
 
             button.findViewById<Button>(R.id.savedDateButton).apply {
                 text = formattedDate
                 setOnClickListener {
-                    // Reset background for all buttons
                     for (i in 0 until binding.savedDatesContainer.childCount) {
                         val child = binding.savedDatesContainer.getChildAt(i)
                         child.findViewById<Button>(R.id.savedDateButton).isSelected = false
                     }
 
-                    // Set the selected background for the clicked button
                     this.isSelected = true
-
-                    // Set the selected date in the ViewModel
                     viewModel.setSelectedDate(date)
 
-                    // Create a bundle and add the date to it
                     val bundle = Bundle().apply {
                         putString("selectedDate", date)
                     }
 
                     findNavController().navigate(R.id.action_viewDiaryPageFragment_to_dairyFragment, bundle)
+                    Logger.logEvent(requireContext(), "Diary date selected: $formattedDate")
                 }
             }
             binding.savedDatesContainer.addView(button)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val timeSpent = SystemClock.elapsedRealtime() - startTime
+        Logger.logPageDuration(requireContext(), "View Diary Entries page", timeSpent)
     }
 
     private fun convertToReadableDate(date: String): String {

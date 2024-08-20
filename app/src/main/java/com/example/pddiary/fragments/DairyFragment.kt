@@ -2,6 +2,7 @@ package com.example.pddiary.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pddiary.adapter.DairyAdapter
 import com.example.pddiary.databinding.DairyFragmentBinding
-import com.example.pddiary.models.DairyModel
-import com.example.pddiary.models.HeaderModel
+import com.example.pddiary.utils.Logger
 import android.widget.Toast
 import com.example.pddiary.R
 import java.io.File
@@ -30,6 +30,8 @@ class DairyFragment : Fragment() {
 
     private lateinit var viewModel: DairyViewModel
     private var selectedDate: String = ""
+    private var startTime: Long = 0
+    private var isEditing: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +39,9 @@ class DairyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         dairyBinding = DairyFragmentBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(requireActivity())[DairyViewModel::class.java]
+        startTime = SystemClock.elapsedRealtime()
+        Logger.logEvent(requireContext(), "Visited Diary Page")
         return dairyBinding.root
     }
 
@@ -48,7 +53,6 @@ class DairyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Retrieve the date from the bundle
         selectedDate = arguments?.getString("selectedDate", "").orEmpty()
 
         if (selectedDate.isNotEmpty()) {
@@ -56,25 +60,32 @@ class DairyFragment : Fragment() {
             loadDiaryEntry(selectedDate)
         }
 
-        // Set up the date selector
         binding.tvSelectDiaryDate.setOnClickListener {
             showDatePickerDialog()
         }
 
-        // Access the Button inside the included layout
         val saveButton = view.findViewById<Button>(R.id.dairy_save_button)
         saveButton.setOnClickListener {
             if (selectedDate.isEmpty()) {
                 Toast.makeText(requireContext(), "Please select a date first", Toast.LENGTH_SHORT).show()
             } else {
                 saveDiaryEntry(selectedDate)
+                if (isEditing) {
+                    Logger.logEvent(requireContext(), "Diary entry edited for $selectedDate")
+                } else {
+                    Logger.logEvent(requireContext(), "Diary entry created for $selectedDate")
+                }
             }
+        }
+
+        if (selectedDate.isNotEmpty()) {
+            loadDiaryEntry(selectedDate)
+            isEditing = true
         }
     }
 
     override fun onResume() {
         super.onResume()
-        // Load data for the selected date
         viewModel.loadDiaryDataForSelectedDate(requireContext().filesDir)
         val list = viewModel.getDairyList()
         Log.v("fragmentResumed", list.size.toString() )
@@ -87,7 +98,6 @@ class DairyFragment : Fragment() {
         val adapter = binding.dairyRecyclerview.adapter as DairyAdapter
         val listToSave = adapter.getCurrentList()
         Log.v("fragmentPaused", listToSave.toString() )
-//        viewModel.saveDairyList(listToSave)
         super.onPause()
     }
 
@@ -104,7 +114,7 @@ class DairyFragment : Fragment() {
                 selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
                 val dateFormat = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault())
                 selectedDate = dateFormat.format(selectedCalendar.time)
-                binding.tvSelectedDate.text = selectedDate  // To display the selected date in the middle
+                binding.tvSelectedDate.text = selectedDate
                 loadDiaryEntry(selectedDate)
             },
             year, month, day
@@ -116,12 +126,13 @@ class DairyFragment : Fragment() {
     private fun saveDiaryEntry(date: String) {
         val fileName = "$date.csv"
         val file = File(requireContext().filesDir, fileName)
-        val data = viewModel.getDiaryData() // Assuming you have a method to get the current data
+        val data = viewModel.getDiaryData()
 
         FileOutputStream(file).use { output ->
             output.write(data.toByteArray())
         }
 
+        Logger.logEvent(requireContext(), "Diary entry saved or updated for $date")
         Toast.makeText(requireContext(), "Diary entry saved for $date", Toast.LENGTH_SHORT).show()
     }
 
@@ -132,13 +143,14 @@ class DairyFragment : Fragment() {
         if (file.exists()) {
             val data = FileReader(file).readText()
             viewModel.setDiaryData(data)
-            updateUI() // Refresh the UI with the loaded data
+            updateUI()
             Toast.makeText(requireContext(), "Loaded diary entry for $date", Toast.LENGTH_SHORT).show()
         } else {
-            viewModel.resetToDefault()  // Explicitly reset to default values
+            viewModel.resetToDefault()
             updateUI()
             Toast.makeText(requireContext(), "No diary entry found for $date", Toast.LENGTH_SHORT).show()
         }
+        Logger.logEvent(requireContext(), "Diary entry loaded for editing: $date")
     }
 
     private fun updateUI() {
@@ -148,4 +160,9 @@ class DairyFragment : Fragment() {
         binding.dairyRecyclerview.adapter = adapter
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val timeSpent = SystemClock.elapsedRealtime() - startTime
+        Logger.logPageDuration(requireContext(), "Diary page", timeSpent)
+    }
 }

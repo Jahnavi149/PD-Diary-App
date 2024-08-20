@@ -1,12 +1,14 @@
 package com.example.pddiary.fragments
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.pddiary.databinding.ProfileFragmentBinding
+import com.example.pddiary.utils.Logger
 import org.json.JSONObject
 import java.io.File
 import java.io.FileWriter
@@ -16,12 +18,15 @@ class ProfileFragment : Fragment() {
 
     private lateinit var profileBinding: ProfileFragmentBinding
     private val binding: ProfileFragmentBinding get() = profileBinding
+    private var startTime: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         profileBinding = ProfileFragmentBinding.inflate(inflater, container, false)
+        startTime = SystemClock.elapsedRealtime()
+        Logger.logEvent(requireContext(), "Visited Profile Page")
         return profileBinding.root
     }
 
@@ -30,6 +35,7 @@ class ProfileFragment : Fragment() {
 
         binding.saveButton.setOnClickListener {
             saveProfileToJson()
+            Logger.logEvent(requireContext(), "Profile saved")
         }
     }
 
@@ -45,7 +51,6 @@ class ProfileFragment : Fragment() {
             return
         }
 
-        // Create a JSON object with the profile details
         val profileJson = JSONObject().apply {
             put("patient_id", patientId)
             put("device_name", deviceName)
@@ -54,11 +59,9 @@ class ProfileFragment : Fragment() {
             put("server_address", serverAddress)
         }
 
-        // Define the file name and path
         val fileName = "${patientId}_profile.json"
         val file = File(requireContext().filesDir, fileName)
 
-        // Write the JSON object to the file
         try {
             FileWriter(file).use { it.write(profileJson.toString()) }
             Toast.makeText(requireContext(), "Profile saved successfully", Toast.LENGTH_SHORT).show()
@@ -66,5 +69,11 @@ class ProfileFragment : Fragment() {
             e.printStackTrace()
             Toast.makeText(requireContext(), "Error saving profile", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val timeSpent = SystemClock.elapsedRealtime() - startTime
+        Logger.logPageDuration(requireContext(), "Profile page", timeSpent)
     }
 }
