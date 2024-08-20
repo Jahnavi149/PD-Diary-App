@@ -118,37 +118,38 @@ class DairyViewModel : ViewModel() {
 
     // Deserialize the CSV data and update the list
     fun setDiaryData(data: String) {
-        val lines = data.split("\n")
+        val lines = data.split("\n").filter { it.isNotEmpty() } // Filter out empty lines
         val newList = mutableListOf<DairyListItem>()
 
         for (line in lines) {
-            if (line.isNotEmpty()) {
-                val parts = line.split(",")
-                if (parts.size == 9) {
-                    val model = DairyModel(
-                        time = parts[0],
-                        asleep = parts[1].toBoolean(),
-                        on = parts[2].toBoolean(),
-                        onWithTroublesome = parts[3].toBoolean(),
-                        onWithoutTroublesome = parts[4].toBoolean(),
-                        off = parts[5].toBoolean(),
-                        med1 = parts[6].toBoolean(),
-                        med2 = parts[7].toBoolean(),
-                        measurement = parts[8].toInt()
-                    )
-                    newList.add(model)
-                }
+            val parts = line.split(",")
+            if (parts.size == 9) {
+                val model = DairyModel(
+                    time = parts[0],
+                    asleep = parts[1].toBoolean(),
+                    on = parts[2].toBoolean(),
+                    onWithTroublesome = parts[3].toBoolean(),
+                    onWithoutTroublesome = parts[4].toBoolean(),
+                    off = parts[5].toBoolean(),
+                    med1 = parts[6].toBoolean(),
+                    med2 = parts[7].toBoolean(),
+                    measurement = parts[8].toInt()
+                )
+                newList.add(model)
+                Log.d("DiaryViewModel", "Loaded diary entry: $model")
+            } else {
+                Log.w("DiaryViewModel", "Invalid data format: $line")
             }
         }
 
         if (newList.isNotEmpty()) {
             list.clear()
+            list.add(HeaderModel()) // Ensuring the header is added first
             list.addAll(newList)
-            // Add the button model at the end
-            Log.v("viewModel", "Diary data loaded and updated with ${list.size} items")
+            Log.d("DiaryViewModel", "Final list size after loading data: ${list.size}")
         } else {
             resetToDefault()
-            Log.v("viewModel", "No valid data to update from CSV")
+            Log.d("DiaryViewModel", "No valid data found; reset to default.")
         }
     }
 
