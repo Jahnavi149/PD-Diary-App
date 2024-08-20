@@ -2,14 +2,14 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape>
-            <corners android:radius="1dp" />
-            <solid android:color="#A9A9A9" /> <!-- Dark gray for background track -->
+            <corners android:radius="0.5dp" />
+            <solid android:color="#838383" /> <!-- Dark gray for background track -->
         </shape>
     </item>
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <corners android:radius="1dp" />
+                <corners android:radius="0.5dp" />
                 <solid android:color="#000000" /> <!-- Black for progress track -->
             </shape>
         </clip>

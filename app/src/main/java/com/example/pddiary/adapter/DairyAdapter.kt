@@ -1,9 +1,6 @@
 package com.example.pddiary.adapter
 
 import android.app.AlertDialog
-import android.graphics.Color
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.DatePicker
+import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pddiary.R
 import com.example.pddiary.models.DairyListItem
 import com.example.pddiary.models.DairyModel
 import com.example.pddiary.models.HeaderModel
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 
 
 class DairyAdapter(private val list: MutableList<DairyListItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -78,6 +75,17 @@ class DairyAdapter(private val list: MutableList<DairyListItem>) : RecyclerView.
             is DairyModel -> {
                 val mHolder = holder as ItemViewHolder
 
+                // Get the root layout of the item view
+                val rootLayout = mHolder.itemView.findViewById<LinearLayout>(R.id.root_layout)
+
+                // Set alternating background color
+                val backgroundColor = if (position % 2 == 0) {
+                    ContextCompat.getColor(mHolder.itemView.context, R.color.white)
+                } else {
+                    ContextCompat.getColor(mHolder.itemView.context, R.color.gray_100)
+                }
+                rootLayout.setBackgroundColor(backgroundColor)
+
                 // Unset listeners to prevent unwanted behavior during binding
                 mHolder.asleep.setOnCheckedChangeListener(null)
                 mHolder.on.setOnCheckedChangeListener(null)
@@ -97,6 +105,9 @@ class DairyAdapter(private val list: MutableList<DairyListItem>) : RecyclerView.
                 mHolder.med1.isChecked = item.med1
                 mHolder.med2.isChecked = item.med2
                 mHolder.symptomSeekBar.progress = item.measurement
+
+                // Set initial value of the SeekBar's associated TextView
+                mHolder.itemView.findViewById<TextView>(R.id.seekbar_value).text = item.measurement.toString()
 
                 // Enable/disable checkboxes based on the "asleep" state
                 if (item.asleep) {
@@ -187,6 +198,7 @@ class DairyAdapter(private val list: MutableList<DairyListItem>) : RecyclerView.
                 mHolder.symptomSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                         item.measurement = progress
+                        mHolder.itemView.findViewById<TextView>(R.id.seekbar_value).text = progress.toString()
                         list[position] = item
                     }
 

@@ -39,17 +39,28 @@ class ViewDiaryPageFragment : Fragment() {
             // Convert the date to the readable format
             val formattedDate = convertToReadableDate(date)
 
-            button.findViewById<Button>(R.id.savedDateButton).text = formattedDate
-            button.setOnClickListener {
-                // Set the selected date in the ViewModel
-                viewModel.setSelectedDate(date)
+            button.findViewById<Button>(R.id.savedDateButton).apply {
+                text = formattedDate
+                setOnClickListener {
+                    // Reset background for all buttons
+                    for (i in 0 until binding.savedDatesContainer.childCount) {
+                        val child = binding.savedDatesContainer.getChildAt(i)
+                        child.findViewById<Button>(R.id.savedDateButton).isSelected = false
+                    }
 
-                // Create a bundle and add the date to it
-                val bundle = Bundle().apply {
-                    putString("selectedDate", date)
+                    // Set the selected background for the clicked button
+                    this.isSelected = true
+
+                    // Set the selected date in the ViewModel
+                    viewModel.setSelectedDate(date)
+
+                    // Create a bundle and add the date to it
+                    val bundle = Bundle().apply {
+                        putString("selectedDate", date)
+                    }
+
+                    findNavController().navigate(R.id.action_viewDiaryPageFragment_to_dairyFragment, bundle)
                 }
-
-                findNavController().navigate(R.id.action_viewDiaryPageFragment_to_dairyFragment, bundle)
             }
             binding.savedDatesContainer.addView(button)
         }

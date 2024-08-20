@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="54dp"
     android:orientation="horizontal"
-    android:weightSum="9"
-    android:background="?attr/selectableItemBackground">
+    android:weightSum="9">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/time"
@@ -13,9 +13,10 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textStyle="bold"
+        android:textColor="@android:color/black"
         android:layout_gravity="center"
-        android:background="@drawable/ic_dairy_item_bg"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@drawable/cell_border"/>
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/asleep"
@@ -23,8 +24,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/ic_dairy_item_bg"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@drawable/cell_border"/>
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/on"
@@ -32,8 +33,8 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center"
-        android:background="@drawable/ic_dairy_item_bg"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@drawable/cell_border"/>
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/on_with_troublesome"
@@ -41,72 +42,70 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="center"
-        android:background="@drawable/ic_dairy_item_bg"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@drawable/cell_border"/>
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/on_without_troublesome"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@drawable/ic_dairy_item_bg"
         android:gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@drawable/cell_border"/>
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/off"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_dairy_item_bg"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@drawable/cell_border"/>
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/med_1_status"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_dairy_item_bg"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@drawable/cell_border"/>
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/med_2_status"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_dairy_item_bg"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
-
-    <SeekBar
-        android:id="@+id/symptom_rating_seekbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:max="100"
-        android:background="@drawable/ic_dairy_item_bg"
-        android:padding="17dp"
-        android:progressDrawable="@drawable/seekbar_progress"
-        android:thumb="@drawable/seekbar_thumb"/>
+        android:background="@drawable/cell_border"/>
 
-
-    <!-- New Measurement input
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/measurement_input_layout"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_dairy_item_bg"
-        android:layout_weight="1">
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/cell_border">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/measurement_input"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/seekbar_value"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:gravity="center"/>
-    </com.google.android.material.textfield.TextInputLayout> -->
+            android:text="0"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@android:color/black"/>
 
-
+        <SeekBar
+            android:id="@+id/symptom_rating_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:max="100"
+            android:padding="0dp"
+            android:progressDrawable="@drawable/seekbar_progress"
+            android:thumb="@drawable/seekbar_thumb"/>
+    </LinearLayout>
 </LinearLayout>
