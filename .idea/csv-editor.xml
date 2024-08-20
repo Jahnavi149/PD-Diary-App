@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="$USER_HOME$/Library/Caches/Google/AndroidStudio2024.1/device-explorer/Pixel Fold API 35/_/data/data/com.example.pddiary/files/app_logs/app_log.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
