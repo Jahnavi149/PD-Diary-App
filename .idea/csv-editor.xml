@@ -3,38 +3,10 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="$USER_HOME$/Library/Caches/Google/AndroidStudio2024.1/device-explorer/Pixel Fold API 35/_/data/data/com.example.pddiary/files/07-16-2024.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="$USER_HOME$/Library/Caches/Google/AndroidStudio2024.1/device-explorer/Pixel Fold API 35/_/data/data/com.example.pddiary/files/08-06-2024.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="$USER_HOME$/Library/Caches/Google/AndroidStudio2024.1/device-explorer/Pixel Fold API 35/_/data/data/com.example.pddiary/files/08-20-2024.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="$USER_HOME$/Library/Caches/Google/AndroidStudio2024.1/device-explorer/Pixel Fold API 35/_/data/data/com.example.pddiary/files/08-21-2024.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="$USER_HOME$/Library/Caches/Google/AndroidStudio2024.1/device-explorer/Pixel Fold API 35/_/data/data/com.example.pddiary/files/app_log.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value=":" />
             </Attribute>
           </value>
         </entry>

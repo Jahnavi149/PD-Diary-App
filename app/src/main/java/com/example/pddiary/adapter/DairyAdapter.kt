@@ -94,6 +94,7 @@ class DairyAdapter(private val list: MutableList<DairyListItem>) : RecyclerView.
                 mHolder.off.setOnCheckedChangeListener(null)
                 mHolder.med1.setOnCheckedChangeListener(null)
                 mHolder.med2.setOnCheckedChangeListener(null)
+                mHolder.symptomSeekBar.setOnSeekBarChangeListener(null)
 
                 // Set checkbox states
                 mHolder.time.text = item.time

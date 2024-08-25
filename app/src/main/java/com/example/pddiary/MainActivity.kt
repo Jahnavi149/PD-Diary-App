@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.dairy.setOnClickListener {
-            navController.navigate(R.id.action_global_dairyFragment)
+            navController.navigate(R.id.action_homeFragment_to_dairyFragment)
             setSelectedState(dairy = true)
         }
 
